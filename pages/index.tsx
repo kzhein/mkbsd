@@ -1,7 +1,5 @@
-import { blurHashToDataURL } from '@/utils/blurHashToDataUrl';
 import type { GetStaticProps } from 'next';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 interface Props {
   wallpapers: Wallpaper[];
@@ -42,53 +40,21 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 };
 
 export default function Home({ wallpapers }: Props) {
-  const [shownWallpapers, setShownWallpapers] = useState(
-    wallpapers.slice(0, 10).map(wp => ({
-      ...wp,
-      blurDataURL: blurHashToDataURL(wp.blurHash, 160, 120),
-    }))
-  );
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + document.documentElement.scrollTop !==
-        document.documentElement.offsetHeight
-      ) {
-        return;
-      }
-
-      const nextWallpapers = wallpapers
-        .slice(shownWallpapers.length, shownWallpapers.length + 10)
-        .map(wp => ({
-          ...wp,
-          blurDataURL: blurHashToDataURL(wp.blurHash, 160, 120),
-        }));
-
-      setShownWallpapers([...shownWallpapers, ...nextWallpapers]);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [shownWallpapers]);
-
   return (
     <div>
       <h1 className='text-center text-6xl font-bold my-3'>MKBSD</h1>
 
-      <div className='container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
-        {shownWallpapers.map(wp => (
+      <div className='container mx-auto px-4 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+        {wallpapers.map(wp => (
           <a href={wp.hd} target='_blank' key={wp.hd}>
             <div className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden'>
               <Image
                 unoptimized
-                placeholder='blur'
-                blurDataURL={wp.blurDataURL}
+                placeholder='empty'
                 className='h-[500px] w-full object-cover'
                 width={500}
                 height={500}
-                src={wp.preview}
+                src={wp.sd}
                 alt={wp.label}
               />
               <div className='p-2'>
