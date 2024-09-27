@@ -44,10 +44,10 @@ export default function Home({ wallpapers }: Props) {
     <div>
       <h1 className='text-center text-6xl font-bold my-3'>MKBSD</h1>
 
-      <div className='container mx-auto px-4 py-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+      <div className='container mx-auto px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         {wallpapers.map(wp => (
           <a href={wp.hd} target='_blank' key={wp.hd}>
-            <div className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden'>
+            <div className='cursor-pointer'>
               <Image
                 unoptimized
                 placeholder='empty'
