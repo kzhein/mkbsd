@@ -15,7 +15,7 @@ export function blurHashToDataURL(
 
 // thanks to https://github.com/wheany/js-png-encoder
 function parsePixels(pixels: Uint8ClampedArray, width: number, height: number) {
-  const pixelsString = [...pixels]
+  const pixelsString = Array.from(pixels)
     .map(byte => String.fromCharCode(byte))
     .join('');
   const pngString = generatePng(width, height, pixelsString);

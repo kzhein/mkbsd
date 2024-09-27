@@ -47,11 +47,8 @@ export default function Home({ wallpapers }: Props) {
 
       <div className='container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
         {wallpapers.map(wp => (
-          <a href={wp.hd} target='_blank'>
-            <div
-              className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden'
-              key={wp.sd}
-            >
+          <a href={wp.hd} target='_blank' key={wp.hd}>
+            <div className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden'>
               <Image
                 unoptimized
                 placeholder='blur'
