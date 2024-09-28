@@ -1,4 +1,5 @@
 import type { GetStaticProps } from 'next';
+import Head from 'next/head';
 import Image from 'next/image';
 
 interface Props {
@@ -42,6 +43,10 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 export default function Home({ wallpapers }: Props) {
   return (
     <div>
+      <Head>
+        <title>MKBSD</title>
+      </Head>
+
       <h1 className='text-center text-6xl font-bold my-3'>MKBSD</h1>
 
       <div className='container mx-auto px-4 pb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
