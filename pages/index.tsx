@@ -82,7 +82,13 @@ export default function Home({ wallpapers }: Props) {
             value={search}
             onChange={e => {
               const url = new URL(window.location.href);
-              url.searchParams.set('search', e.target.value);
+
+              if (!e.target.value) {
+                url.searchParams.delete('search');
+              } else {
+                url.searchParams.set('search', e.target.value);
+              }
+
               router.replace(url, undefined, { shallow: true });
             }}
           />
