@@ -103,7 +103,7 @@ export default function Home({ wallpapers }: Props) {
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
           {wallpapersToShow.map(wp => (
             <a href={wp.hd} target='_blank' key={wp.hd}>
-              <div className='cursor-pointer'>
+              <div className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden relative'>
                 <Image
                   unoptimized
                   placeholder='empty'
@@ -113,8 +113,8 @@ export default function Home({ wallpapers }: Props) {
                   src={wp.sd}
                   alt={wp.label}
                 />
-                <div className='p-2'>
-                  <p className='text-lg'>{wp.label}</p>
+                <div className='px-5 py-3 absolute bottom-0 w-full bg-black/45'>
+                  <p className='text-lg text-white'>{wp.label}</p>
                 </div>
               </div>
             </a>
