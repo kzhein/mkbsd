@@ -1,3 +1,4 @@
+import { blurHashToDataURL } from '@/utils/blurHashToDataUrl';
 import type { GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -9,7 +10,7 @@ interface Props {
 
 interface Wallpaper {
   label: string;
-  blurHash: string;
+  blurDataURL: string;
   preview: string;
   sd: string;
   hd: string;
@@ -31,7 +32,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
   const wallpapers: Wallpaper[] = content.wallpapers.map((wp: any) => ({
     label: wp.label,
-    blurHash: wp.previews.standard[0].blurHash,
+    blurDataURL: blurHashToDataURL(wp.previews.standard[0].blurHash, 3, 3),
     preview:
       media.data[wp.previews.standard[0].id].wfs ||
       media.data[wp.previews.standard[0].id].s,
@@ -106,7 +107,8 @@ export default function Home({ wallpapers }: Props) {
               <div className='cursor-pointer bg-white border border-gray-200 rounded-lg shadow overflow-hidden relative'>
                 <Image
                   unoptimized
-                  placeholder='empty'
+                  placeholder='blur'
+                  blurDataURL={wp.blurDataURL}
                   className='h-[500px] w-full object-cover'
                   width={500}
                   height={500}
